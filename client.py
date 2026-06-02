@@ -30,14 +30,14 @@ arquivo_rewards = "recompensas.txt"
 
 
 #Hyperaments
-gamma = 0.95                  
+gamma = 0.99                  
 init_alpha = 0.5
 min_alpha = 0.01
 alpha_decay_ratio = 0.5       
 init_epsilon = 1.0
-min_epsilon = 0.1
-epsilon_decay_ratio = 0.8     
-n_episodes = 10000              
+min_epsilon = 0.15
+epsilon_decay_ratio = 0.95     
+n_episodes = 5000              
 max_steps = 30
 state_size = 24 * 4
 action_size = 3
@@ -82,8 +82,12 @@ for e in range(episodio_inicial, n_episodes):
         reward_ep += reward
         #Acabou o Episodio 
         if(reward==-100 or reward == 300):
-            Q[state_d][action] = Q[state_d][action] + alphas[e] * (reward - Q[state_d][action])
-            break   
+		if reward == -100:
+                	reward_penalizador_de_morte = -500
+               		 Q[state_d][action] = Q[state_d][action] + alphas[e] * (reward_penalizador_de_morte - Q[state_d][action])
+		else:
+            		Q[state_d][action] = Q[state_d][action] + alphas[e] * (reward - Q[state_d][action])
+		break   
              
         Q[state_d][action] = Q[state_d][action] + alphas[e]*(reward + gamma*(np.max(Q[new_state_d]) - Q[state_d][action]))
 
