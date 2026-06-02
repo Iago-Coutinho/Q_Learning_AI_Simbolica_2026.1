@@ -82,12 +82,12 @@ for e in range(episodio_inicial, n_episodes):
         reward_ep += reward
         #Acabou o Episodio 
         if(reward==-100 or reward == 300):
-		if reward == -100:
-                	reward_penalizador_de_morte = -500
-               		 Q[state_d][action] = Q[state_d][action] + alphas[e] * (reward_penalizador_de_morte - Q[state_d][action])
-		else:
-            		Q[state_d][action] = Q[state_d][action] + alphas[e] * (reward - Q[state_d][action])
-		break   
+			if reward == -100:
+        		reward_penalizador_de_morte = -500
+				Q[state_d][action] = Q[state_d][action] + alphas[e] * (reward_penalizador_de_morte - Q[state_d][action])
+			else:
+            	Q[state_d][action] = Q[state_d][action] + alphas[e] * (reward - Q[state_d][action])
+			break   
              
         Q[state_d][action] = Q[state_d][action] + alphas[e]*(reward + gamma*(np.max(Q[new_state_d]) - Q[state_d][action]))
 
