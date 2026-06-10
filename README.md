@@ -102,5 +102,4 @@ cd linux/
 **Terminal 2 — Agente (treino):**
 python3 client.py
 
-**Para rodar a política ótima (sem treino):**
-python3 run.py
+
